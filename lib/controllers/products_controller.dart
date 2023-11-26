@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:emart_seller/const/const.dart';
 import 'package:emart_seller/controllers/home_controller.dart';
@@ -154,7 +153,6 @@ class ProductsController extends GetxController {
             ),
             TextButton(
               onPressed: () {
-                // Add the selected color when the "Done" button is pressed
                 if (!selectedColors.contains(selectedColor) &&
                     selectedColors.length < 5) {
                   selectedColors.add(selectedColor);

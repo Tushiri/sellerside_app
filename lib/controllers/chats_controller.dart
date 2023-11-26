@@ -65,7 +65,6 @@ class ChatsController extends GetxController {
   }
 
   Future<void> removeAllChats() async {
-    // Delete all messages in the chat
     await firestore
         .collection(chatsCollection)
         .doc(chatDocId)
@@ -76,11 +75,7 @@ class ChatsController extends GetxController {
         messageDocument.reference.delete();
       }
     });
-
-    // Delete the chat document
     await firestore.collection(chatsCollection).doc(chatDocId).delete();
-
-    // Navigate back to the messages screen
     Get.back();
   }
 }

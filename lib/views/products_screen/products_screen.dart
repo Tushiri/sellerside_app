@@ -95,6 +95,7 @@ class ProductsScreen extends StatelessWidget {
                                               color: darkGrey)
                                         ],
                                       ).onTap(() {
+                                        //case 1: (edit)
                                         switch (i) {
                                           case 0:
                                             if (data[index]['is_featured'] ==
@@ -111,8 +112,6 @@ class ProductsScreen extends StatelessWidget {
                                             }
                                             break;
                                           case 1:
-                                            break;
-                                          case 2:
                                             controller
                                                 .removeProduct(data[index].id);
                                             VxToast.show(context,
