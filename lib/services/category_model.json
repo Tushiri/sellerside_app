@@ -1,0 +1,70 @@
+{
+    "categories" : [
+        {
+            "name": "T-Shirts",
+            "subcategory":[
+                "Vintage T-Shirts",
+                "SpaceMan",
+                "Rookie of the Year"
+            ]
+        },
+        {
+            "name": "Shorts",
+            "subcategory":[
+                "Jogger Shorts",
+                "Hem Shorts",
+                "Corduroy"
+            ]
+        },
+        {
+            "name": "Slippers",
+            "subcategory":[
+                "Indoor Slippers",
+                "OutDoor Slippers"
+            ]
+        },
+        {
+            "name": "Hoodies",
+            "subcategory":[
+                "Sweater",
+                "Air Mickey"
+            ]
+        },
+        {
+            "name": "Accessories",
+            "subcategory":[
+                "Tote Bag",
+                "Necklace",
+                "Earings"
+            ]
+        },
+        {
+            "name": "Shoes",
+            "subcategory":[
+                "Nike",
+                "Jordan",
+                "Adidas",
+                "Lebron"
+            ]
+        },
+        {
+            "name": "Caps",
+            "subcategory":[
+                "47 Brand"
+            ]
+        },
+        {
+            "name": "Pants",
+            "subcategory":[
+                "Cargo Pants",
+                "Sweat Pants"
+            ]
+        },
+        {
+            "name": "Tumblers",
+            "subcategory":[
+                
+            ]
+        }
+    ]
+}
