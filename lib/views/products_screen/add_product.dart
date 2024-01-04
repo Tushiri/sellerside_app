@@ -48,7 +48,8 @@ class AddProduct extends StatelessWidget {
                 customTextField(
                     hint: "eg. BMW",
                     label: "Product name",
-                    controller: controller.pnameController),
+                    controller: controller.pnameController,
+                    maxCharacters: 10),
                 10.heightBox,
                 customTextField(
                     hint: "eg. Nice product",

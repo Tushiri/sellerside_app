@@ -2,14 +2,14 @@ import 'package:emart_seller/const/const.dart';
 import 'package:emart_seller/views/widgets/text_style.dart';
 import 'package:flutter/services.dart';
 
-Widget customTextField({label, hint, controller, isDesc = false}) {
+Widget customTextField(
+    {label, hint, controller, isDesc = false, maxCharacters}) {
   return TextField(
-    inputFormatters: [
-      LengthLimitingTextInputFormatter(20),
-    ],
     style: const TextStyle(color: white),
     controller: controller,
     maxLines: isDesc ? 4 : 1,
+    inputFormatters:
+        isDesc ? null : [LengthLimitingTextInputFormatter(maxCharacters)],
     decoration: InputDecoration(
         isDense: true,
         label: boldText(text: label),

@@ -3,61 +3,56 @@
         {
             "name": "T-Shirts",
             "subcategory":[
-                "Vintage T-Shirts",
-                "SpaceMan",
-                "Rookie of the Year"
+                "Red",
+                "White",
+                "Black",
+                "New Colorway"
             ]
-        },
+        }, 
         {
             "name": "Shorts",
             "subcategory":[
-                "Jogger Shorts",
-                "Hem Shorts",
-                "Corduroy"
+                
             ]
         },
         {
-            "name": "Slippers",
+            "name": "Sweater",
             "subcategory":[
-                "Indoor Slippers",
-                "OutDoor Slippers"
+                
             ]
         },
         {
             "name": "Hoodies",
             "subcategory":[
-                "Sweater",
+                "J1 Lego",
                 "Air Mickey"
             ]
         },
         {
-            "name": "Accessories",
+            "name": "Tote bag",
             "subcategory":[
-                "Tote Bag",
-                "Necklace",
-                "Earings"
+                
             ]
         },
         {
             "name": "Shoes",
             "subcategory":[
-                "Nike",
-                "Jordan",
-                "Adidas",
-                "Lebron"
+                "Air Force",
+                "Freak 5 By You",
+                "Dunk High",
+                "Dunk Low"
             ]
         },
         {
-            "name": "Caps",
+            "name": "Slippers",
             "subcategory":[
-                "47 Brand"
+                
             ]
         },
         {
             "name": "Pants",
             "subcategory":[
-                "Cargo Pants",
-                "Sweat Pants"
+                
             ]
         },
         {
