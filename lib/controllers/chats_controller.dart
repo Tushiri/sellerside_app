@@ -1,9 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:emart_seller/const/const.dart';
 import 'package:emart_seller/controllers/home_controller.dart';
+import 'package:emart_seller/services/store_services.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 
 class ChatsController extends GetxController {
+  final ImagePicker _imagePicker = ImagePicker();
+
   @override
   void onInit() {
     getChatId();
@@ -48,18 +52,48 @@ class ChatsController extends GetxController {
     isLoading(false);
   }
 
+  // ignore: unused_element
+  Future<void> _pickImage() async {
+    final XFile? image = await _imagePicker.pickImage(
+      source: ImageSource.gallery,
+    );
+
+    if (image != null) {
+      String imageUrl = await StoreServices.uploadImage(image.path);
+
+      sendImage(imageUrl);
+    }
+  }
+
+  sendImage(String imageUrl) async {
+    chats.doc(chatDocId).update({
+      'created_on': FieldValue.serverTimestamp(),
+      'last_msg': "Sent an Image",
+      'fromId': senderId,
+      'toId': currentId,
+    });
+
+    chats.doc(chatDocId).collection(messagesCollection).doc().set({
+      'created_on': FieldValue.serverTimestamp(),
+      'msg': imageUrl,
+      'uid': currentId,
+      'is_image': true,
+    });
+  }
+
   sendMsg(String msg) async {
     if (msg.trim().isNotEmpty) {
+      chats.doc(chatDocId).collection(messagesCollection).add({
+        'created_on': FieldValue.serverTimestamp(),
+        'msg': msg,
+        'uid': currentId,
+      });
+
       chats.doc(chatDocId).update({
         'created_on': FieldValue.serverTimestamp(),
         'last_msg': msg,
         'fromId': senderId,
         'toId': currentId,
-      });
-      chats.doc(chatDocId).collection(messagesCollection).doc().set({
-        'created_on': FieldValue.serverTimestamp(),
-        'msg': msg,
-        'uid': currentId,
       });
     }
   }

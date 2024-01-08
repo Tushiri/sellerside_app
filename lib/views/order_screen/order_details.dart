@@ -18,13 +18,26 @@ class OrderDetails extends StatefulWidget {
 class _OrderDetailsState extends State<OrderDetails> {
   var controller = Get.find<OrdersController>();
 
+  String _getDeliveryStatusText() {
+    if (controller.delivered.value) {
+      return "Order Delivered";
+    } else if (controller.ondelivery.value) {
+      return "Order is on Delivery";
+    } else if (controller.confirmed.value) {
+      return "Order Confirmed";
+    } else {
+      return "Order Placed";
+    }
+  }
+
   @override
   void initState() {
     super.initState();
+
     controller.getOrders(widget.data);
-    controller.confirmed.value = widget.data['order_confirmed'];
-    controller.ondelivery.value = widget.data['order_on_delivery'];
-    controller.delivered.value = widget.data['order_delivered'];
+    controller.confirmed.value = widget.data['order_confirmed'] ?? false;
+    controller.ondelivery.value = widget.data['order_on_delivery'] ?? false;
+    controller.delivered.value = widget.data['order_delivered'] ?? false;
   }
 
   @override
@@ -45,15 +58,28 @@ class _OrderDetailsState extends State<OrderDetails> {
             height: 60,
             width: context.screenWidth,
             child: ourButton(
-                color: green,
-                onPress: () {
-                  controller.confirmed(true);
-                  controller.changeStatus(
-                      title: "order_confirmed",
-                      status: true,
-                      docID: widget.data.id);
-                },
-                title: "Confirm Order"),
+              color: green,
+              onPress: () async {
+                PaymentStatus paymentStatus = PaymentStatus.unpaid;
+                if (widget.data['payment_method'] == 'G Cash' ||
+                    widget.data['payment_method'] == 'PayMaya') {
+                  paymentStatus = PaymentStatus.paid;
+                }
+
+                await controller.changePaymentStatus(
+                  status: paymentStatus,
+                  docID: widget.data.id,
+                );
+
+                controller.confirmed(true);
+                controller.changeStatus(
+                  title: "order_confirmed",
+                  status: true,
+                  docID: widget.data.id,
+                );
+              },
+              title: "Confirm Order",
+            ),
           ),
         ),
         body: Padding(
@@ -69,7 +95,10 @@ class _OrderDetailsState extends State<OrderDetails> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       boldText(
-                          text: "Order Status:", color: fontGrey, size: 16.0),
+                        text: "Order Status:",
+                        color: fontGrey,
+                        size: 16.0,
+                      ),
                       SwitchListTile(
                         activeColor: green,
                         value: true,
@@ -79,41 +108,70 @@ class _OrderDetailsState extends State<OrderDetails> {
                       SwitchListTile(
                         activeColor: green,
                         value: controller.confirmed.value,
-                        onChanged: (value) {
-                          controller.confirmed.value = value;
+                        onChanged: (value) async {
+                          if (value) {
+                            await controller.changeStatus(
+                              title: "order_confirmed",
+                              status: true,
+                              docID: widget.data.id,
+                            );
+                          } else {
+                            await controller.changeStatus(
+                              title: "order_confirmed",
+                              status: false,
+                              docID: widget.data.id,
+                            );
+                          }
                         },
                         title: boldText(text: "Confirmed", color: fontGrey),
                       ),
                       SwitchListTile(
                         activeColor: green,
                         value: controller.ondelivery.value,
-                        onChanged: (value) {
-                          controller.ondelivery.value = value;
-
-                          controller.changeStatus(
+                        onChanged: (value) async {
+                          if (value) {
+                            await controller.changeStatus(
                               title: "order_on_delivery",
-                              status: value,
-                              docID: widget.data.id);
+                              status: true,
+                              docID: widget.data.id,
+                            );
+                          } else {
+                            await controller.changeStatus(
+                              title: "order_on_delivery",
+                              status: false,
+                              docID: widget.data.id,
+                            );
+
+                            controller.delivered.value = false;
+                          }
                         },
                         title: boldText(text: "on Delivery", color: fontGrey),
                       ),
                       SwitchListTile(
                         activeColor: green,
                         value: controller.delivered.value,
-                        onChanged: (value) {
-                          controller.delivered.value;
-
-                          controller.changeStatus(
+                        onChanged: (value) async {
+                          if (value) {
+                            await controller.changeStatus(
                               title: "order_delivered",
-                              status: value,
-                              docID: widget.data.id);
+                              status: true,
+                              docID: widget.data.id,
+                            );
+
+                            controller.ondelivery.value = true;
+                          } else {
+                            await controller.changeStatus(
+                              title: "order_delivered",
+                              status: false,
+                              docID: widget.data.id,
+                            );
+                          }
                         },
                         title: boldText(text: "Delivered", color: fontGrey),
                       ),
                     ],
                   )
                       .box
-                      .padding(const EdgeInsets.all(8))
                       .outerShadowMd
                       .white
                       .border(color: lightGrey)
@@ -139,8 +197,11 @@ class _OrderDetailsState extends State<OrderDetails> {
                       title2: "Payment Method",
                     ),
                     orderPlaceDetail(
-                      d1: "Unpaid",
-                      d2: "Order Placed",
+                      d1: (widget.data['payment_method'] == 'G Cash' ||
+                              widget.data['payment_method'] == 'PayMaya')
+                          ? "Paid"
+                          : "Unpaid",
+                      d2: _getDeliveryStatusText(),
                       title1: "Payment Status",
                       title2: "Delivery Status",
                     ),
@@ -153,7 +214,6 @@ class _OrderDetailsState extends State<OrderDetails> {
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              //"Shipping Address".text.fontFamily(semibold).make(),
                               boldText(
                                   text: "Shipping Address", color: purpleColor),
                               "${widget.data['order_by_name']}".text.make(),

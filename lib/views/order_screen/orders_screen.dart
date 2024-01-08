@@ -13,6 +13,18 @@ import 'package:intl/intl.dart' as intl;
 
 class OrdersScreen extends StatelessWidget {
   const OrdersScreen({super.key});
+  String _getPaymentStatus(QueryDocumentSnapshot<Object?> document) {
+    var data = document.data() as Map<String, dynamic>?;
+
+    // Check if 'payment_status' key exists in the document data
+    if (data != null && data.containsKey('payment_status')) {
+      var paymentStatus = data['payment_status'];
+      return paymentStatus == 'paid' ? 'Paid' : 'Unpaid';
+    } else {
+      // Handle the case where 'payment_status' is not present
+      return 'Payment Status N/A';
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -66,7 +78,9 @@ class OrdersScreen extends StatelessWidget {
                               children: [
                                 const Icon(Icons.payment, color: fontGrey),
                                 10.widthBox,
-                                boldText(text: unpaid, color: red),
+                                boldText(
+                                    text: _getPaymentStatus(data[index]),
+                                    color: red),
                               ],
                             ),
                           ],

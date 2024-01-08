@@ -1,6 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:emart_seller/const/const.dart';
 import 'package:get/get.dart';
+import 'package:logger/logger.dart';
+
+final logger = Logger();
+
+enum PaymentStatus {
+  unpaid,
+  paid,
+}
 
 class OrdersController extends GetxController {
   var orders = [];
@@ -21,5 +29,16 @@ class OrdersController extends GetxController {
   changeStatus({title, status, docID}) async {
     var store = firestore.collection(ordersCollection).doc(docID);
     await store.set({title: status}, SetOptions(merge: true));
+    logger.i('Status updated successfully to: $status');
+  }
+
+  changePaymentStatus({required PaymentStatus status, required docID}) async {
+    try {
+      var store = firestore.collection(ordersCollection).doc(docID);
+      await store.update({'payment_status': status.toString().split('.').last});
+      logger.i('Payment status updated successfully to: $status');
+    } catch (e) {
+      logger.e('Error updating payment status: $e');
+    }
   }
 }
