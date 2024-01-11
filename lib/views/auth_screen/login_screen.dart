@@ -1,8 +1,8 @@
-import 'package:emart_seller/const/const.dart';
-import 'package:emart_seller/controllers/auth_controller.dart';
-import 'package:emart_seller/views/widgets/loading_indicator.dart';
-import 'package:emart_seller/views/widgets/our_button.dart';
-import 'package:emart_seller/views/widgets/text_style.dart';
+import 'package:sellerside_app/const/const.dart';
+import 'package:sellerside_app/controllers/auth_controller.dart';
+import 'package:sellerside_app/views/widgets/loading_indicator.dart';
+import 'package:sellerside_app/views/widgets/our_button.dart';
+import 'package:sellerside_app/views/widgets/text_style.dart';
 import 'package:get/get.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -78,11 +78,14 @@ class LoginScreen extends StatelessWidget {
                               onPress: () async {
                                 controller.isloading(true);
 
+                                final currentContext = context;
+
                                 await controller
-                                    .loginMethod(context: context)
+                                    .loginMethod(context: currentContext)
                                     .then((value) {
                                   if (value != null) {
-                                    VxToast.show(context, msg: "Logged in");
+                                    VxToast.show(currentContext,
+                                        msg: "Logged in");
                                     controller.isloading(false);
                                   } else {
                                     controller.isloading(false);

@@ -1,22 +1,34 @@
-import 'package:emart_seller/const/const.dart';
-import 'package:emart_seller/controllers/orders_controller.dart';
-import 'package:emart_seller/views/order_screen/components/order_place.dart';
-import 'package:emart_seller/views/widgets/our_button.dart';
-import 'package:emart_seller/views/widgets/text_style.dart';
+import 'package:sellerside_app/const/const.dart';
+import 'package:sellerside_app/controllers/orders_controller.dart';
+import 'package:sellerside_app/services/store_services.dart';
+import 'package:sellerside_app/views/order_screen/components/order_place.dart';
+import 'package:sellerside_app/views/widgets/our_button.dart';
+import 'package:sellerside_app/views/widgets/text_style.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:get/get.dart';
 // ignore: depend_on_referenced_packages
 import 'package:intl/intl.dart' as intl;
+import 'package:logger/logger.dart';
 
 class OrderDetails extends StatefulWidget {
   final dynamic data;
+
   const OrderDetails({super.key, this.data});
 
   @override
   State<OrderDetails> createState() => _OrderDetailsState();
 }
 
+final Logger logger = Logger();
+
 class _OrderDetailsState extends State<OrderDetails> {
   var controller = Get.find<OrdersController>();
+  var storeServices = StoreServices();
+
+  Future<String?> getUserDeviceToken() async {
+    FirebaseMessaging messaging = FirebaseMessaging.instance;
+    return await messaging.getToken();
+  }
 
   String _getDeliveryStatusText() {
     if (controller.delivered.value) {
@@ -115,12 +127,20 @@ class _OrderDetailsState extends State<OrderDetails> {
                               status: true,
                               docID: widget.data.id,
                             );
+                            controller.confirmed.value = true;
+
+                            await storeServices.sendOrderStatusNotification(
+                              'Order is Confirmed',
+                              widget.data.id,
+                              widget.data['order_by'],
+                            );
                           } else {
                             await controller.changeStatus(
                               title: "order_confirmed",
                               status: false,
                               docID: widget.data.id,
                             );
+                            controller.confirmed.value = false;
                           }
                         },
                         title: boldText(text: "Confirmed", color: fontGrey),
@@ -135,6 +155,14 @@ class _OrderDetailsState extends State<OrderDetails> {
                               status: true,
                               docID: widget.data.id,
                             );
+
+                            controller.ondelivery.value = true;
+
+                            await storeServices.sendOrderStatusNotification(
+                              'Order is On Delivery',
+                              widget.data.id,
+                              widget.data['order_by'],
+                            );
                           } else {
                             await controller.changeStatus(
                               title: "order_on_delivery",
@@ -142,7 +170,7 @@ class _OrderDetailsState extends State<OrderDetails> {
                               docID: widget.data.id,
                             );
 
-                            controller.delivered.value = false;
+                            controller.ondelivery.value = false;
                           }
                         },
                         title: boldText(text: "on Delivery", color: fontGrey),
@@ -158,13 +186,20 @@ class _OrderDetailsState extends State<OrderDetails> {
                               docID: widget.data.id,
                             );
 
-                            controller.ondelivery.value = true;
+                            controller.delivered.value = true;
+
+                            await storeServices.sendOrderStatusNotification(
+                              ' Order is Delivered',
+                              widget.data.id,
+                              widget.data['order_by'],
+                            );
                           } else {
                             await controller.changeStatus(
                               title: "order_delivered",
                               status: false,
                               docID: widget.data.id,
                             );
+                            controller.delivered.value = false;
                           }
                         },
                         title: boldText(text: "Delivered", color: fontGrey),

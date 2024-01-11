@@ -1,9 +1,9 @@
-import 'package:emart_seller/const/const.dart';
-import 'package:emart_seller/controllers/home_controller.dart';
-import 'package:emart_seller/views/home_screen/home_screen.dart';
-import 'package:emart_seller/views/order_screen/orders_screen.dart';
-import 'package:emart_seller/views/products_screen/products_screen.dart';
-import 'package:emart_seller/views/profile_screen/profile_screen.dart';
+import 'package:sellerside_app/const/const.dart';
+import 'package:sellerside_app/controllers/home_controller.dart';
+import 'package:sellerside_app/views/home_screen/home_screen.dart';
+import 'package:sellerside_app/views/order_screen/orders_screen.dart';
+import 'package:sellerside_app/views/products_screen/products_screen.dart';
+import 'package:sellerside_app/views/profile_screen/profile_screen.dart';
 import 'package:get/get.dart';
 
 class Home extends StatelessWidget {

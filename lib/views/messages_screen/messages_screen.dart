@@ -1,9 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:emart_seller/const/const.dart';
-import 'package:emart_seller/services/store_services.dart';
-import 'package:emart_seller/views/messages_screen/chat_screen.dart';
-import 'package:emart_seller/views/widgets/loading_indicator.dart';
-import 'package:emart_seller/views/widgets/text_style.dart';
+import 'package:sellerside_app/const/const.dart';
+import 'package:sellerside_app/services/store_services.dart';
+import 'package:sellerside_app/views/messages_screen/chat_screen.dart';
+import 'package:sellerside_app/views/widgets/loading_indicator.dart';
+import 'package:sellerside_app/views/widgets/text_style.dart';
 import 'package:get/get.dart';
 // ignore: depend_on_referenced_packages
 import 'package:intl/intl.dart' as intl;

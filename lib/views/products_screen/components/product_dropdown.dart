@@ -1,6 +1,6 @@
-import 'package:emart_seller/const/const.dart';
-import 'package:emart_seller/controllers/products_controller.dart';
-import 'package:emart_seller/views/widgets/text_style.dart';
+import 'package:sellerside_app/const/const.dart';
+import 'package:sellerside_app/controllers/products_controller.dart';
+import 'package:sellerside_app/views/widgets/text_style.dart';
 import 'package:get/get.dart';
 
 Widget productDropdown(

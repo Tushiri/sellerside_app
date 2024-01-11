@@ -1,4 +1,4 @@
-import 'package:emart_seller/const/const.dart';
+import 'package:sellerside_app/const/const.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 

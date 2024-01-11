@@ -1,5 +1,5 @@
-import 'package:emart_seller/const/const.dart';
-import 'package:emart_seller/views/widgets/text_style.dart';
+import 'package:sellerside_app/const/const.dart';
+import 'package:sellerside_app/views/widgets/text_style.dart';
 import 'package:flutter/services.dart';
 
 Widget customTextField(

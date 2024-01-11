@@ -1,8 +1,8 @@
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:emart_seller/const/const.dart';
-import 'package:emart_seller/controllers/home_controller.dart';
-import 'package:emart_seller/models/category_model.dart';
+import 'package:sellerside_app/const/const.dart';
+import 'package:sellerside_app/controllers/home_controller.dart';
+import 'package:sellerside_app/models/category_model.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';

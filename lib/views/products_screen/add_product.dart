@@ -1,11 +1,11 @@
-import 'package:emart_seller/const/const.dart';
-import 'package:emart_seller/controllers/products_controller.dart';
-import 'package:emart_seller/views/products_screen/components/product_dropdown.dart';
-import 'package:emart_seller/views/products_screen/components/product_images.dart';
-import 'package:emart_seller/views/widgets/custom_textfield.dart';
-import 'package:emart_seller/views/widgets/loading_indicator.dart';
-import 'package:emart_seller/views/widgets/our_button.dart';
-import 'package:emart_seller/views/widgets/text_style.dart';
+import 'package:sellerside_app/const/const.dart';
+import 'package:sellerside_app/controllers/products_controller.dart';
+import 'package:sellerside_app/views/products_screen/components/product_dropdown.dart';
+import 'package:sellerside_app/views/products_screen/components/product_images.dart';
+import 'package:sellerside_app/views/widgets/custom_textfield.dart';
+import 'package:sellerside_app/views/widgets/loading_indicator.dart';
+import 'package:sellerside_app/views/widgets/our_button.dart';
+import 'package:sellerside_app/views/widgets/text_style.dart';
 import 'package:get/get.dart';
 
 class AddProduct extends StatelessWidget {

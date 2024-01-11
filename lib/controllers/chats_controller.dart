@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:emart_seller/const/const.dart';
-import 'package:emart_seller/controllers/home_controller.dart';
-import 'package:emart_seller/services/store_services.dart';
+import 'package:sellerside_app/const/const.dart';
+import 'package:sellerside_app/controllers/home_controller.dart';
+import 'package:sellerside_app/services/store_services.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 

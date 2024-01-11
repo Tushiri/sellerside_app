@@ -1,14 +1,17 @@
-import 'package:emart_seller/const/const.dart';
-import 'package:emart_seller/views/auth_screen/login_screen.dart';
-import 'package:emart_seller/views/home_screen/home.dart';
+import 'package:sellerside_app/const/const.dart';
+import 'package:sellerside_app/controllers/orders_controller.dart';
+import 'package:sellerside_app/views/auth_screen/login_screen.dart';
+import 'package:sellerside_app/views/home_screen/home.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:get/get.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
   await Firebase.initializeApp();
+  final controller = Get.put(OrdersController());
+  controller.initializeFirebaseMessaging();
+
   runApp(const MyApp());
 }
 

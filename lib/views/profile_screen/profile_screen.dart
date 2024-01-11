@@ -1,14 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:emart_seller/const/const.dart';
-import 'package:emart_seller/controllers/auth_controller.dart';
-import 'package:emart_seller/controllers/profile_controller.dart';
-import 'package:emart_seller/services/store_services.dart';
-import 'package:emart_seller/views/auth_screen/login_screen.dart';
-import 'package:emart_seller/views/messages_screen/messages_screen.dart';
-import 'package:emart_seller/views/profile_screen/edit_profilescreen.dart';
-import 'package:emart_seller/views/shop_screen/shop_settings_screen.dart';
-import 'package:emart_seller/views/widgets/loading_indicator.dart';
-import 'package:emart_seller/views/widgets/text_style.dart';
+import 'package:sellerside_app/const/const.dart';
+import 'package:sellerside_app/controllers/auth_controller.dart';
+import 'package:sellerside_app/controllers/profile_controller.dart';
+import 'package:sellerside_app/services/store_services.dart';
+import 'package:sellerside_app/views/auth_screen/login_screen.dart';
+import 'package:sellerside_app/views/messages_screen/messages_screen.dart';
+import 'package:sellerside_app/views/profile_screen/edit_profilescreen.dart';
+import 'package:sellerside_app/views/shop_screen/shop_settings_screen.dart';
+import 'package:sellerside_app/views/widgets/loading_indicator.dart';
+import 'package:sellerside_app/views/widgets/text_style.dart';
 import 'package:get/get.dart';
 
 class ProfileScreen extends StatelessWidget {

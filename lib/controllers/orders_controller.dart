@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:emart_seller/const/const.dart';
+import 'package:sellerside_app/const/const.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:get/get.dart';
 import 'package:logger/logger.dart';
 
@@ -40,5 +41,19 @@ class OrdersController extends GetxController {
     } catch (e) {
       logger.e('Error updating payment status: $e');
     }
+  }
+
+  FirebaseMessaging messaging = FirebaseMessaging.instance;
+
+  void _handleNotification(RemoteMessage message) {
+    logger.i('Notification received: ${message.notification?.body}');
+  }
+
+  initializeFirebaseMessaging() {
+    FirebaseMessaging.onMessage.listen(_handleNotification);
+  }
+
+  OrdersController() {
+    initializeFirebaseMessaging();
   }
 }

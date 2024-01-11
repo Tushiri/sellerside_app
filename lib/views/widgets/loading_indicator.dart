@@ -1,4 +1,4 @@
-import 'package:emart_seller/const/const.dart';
+import 'package:sellerside_app/const/const.dart';
 
 Widget loadingIndicator({circleColor = white}) {
   return Center(
