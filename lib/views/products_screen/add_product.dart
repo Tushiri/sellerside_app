@@ -14,6 +14,7 @@ class AddProduct extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var controller = Get.find<ProductsController>();
+    controller.clearState();
     return Obx(
       () => Scaffold(
         backgroundColor: black,
@@ -49,7 +50,7 @@ class AddProduct extends StatelessWidget {
                     hint: "eg. BMW",
                     label: "Product name",
                     controller: controller.pnameController,
-                    maxCharacters: 10),
+                    maxCharacters: 16),
                 10.heightBox,
                 customTextField(
                     hint: "eg. Nice product",

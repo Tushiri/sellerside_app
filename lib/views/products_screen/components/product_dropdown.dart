@@ -3,8 +3,8 @@ import 'package:sellerside_app/controllers/products_controller.dart';
 import 'package:sellerside_app/views/widgets/text_style.dart';
 import 'package:get/get.dart';
 
-Widget productDropdown(
-    hint, List<String> list, dropvalue, ProductsController controller) {
+Widget productDropdown(hint, List<String> list, RxString dropvalue,
+    ProductsController controller) {
   return Obx(
     () => DropdownButtonHideUnderline(
       child: DropdownButton(

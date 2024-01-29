@@ -85,6 +85,25 @@ class StoreServices {
     }
   }
 
+  // Future<void> sendNotification(String token, String title, String message, type) async{
+  //   var headers = {'Content-Type': 'application/json','Authorization': 'key=${Constants.serverKey}'}
+  //   var request = http.Request('Post', Uri.parse('https://fcm.googleapis.com/fcm/send'));
+  //   request.body = json.encode({
+  //     "to": token,
+  //     "notification": {"title": title, "body": message},
+  //     "data": {"title": title, "body": message, "type": type},
+  //   });
+  //   request.headers.addAll(headers);
+
+  //   http.StreamedResponse response = await request.send();
+
+  //   if (response.statusCode == 200) {
+  //     logger.w("send new sign up response: ${await response.stream.bytesToString()}");
+
+  //   } else {
+  //     logger.e("send new sign up error: ${response.reasonPhrase}");
+  //   }
+  // }
   Future<void> sendNotification(
       String title, String body, String? userId, String deviceToken) async {
     try {

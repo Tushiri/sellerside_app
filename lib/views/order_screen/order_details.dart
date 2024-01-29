@@ -34,7 +34,7 @@ class _OrderDetailsState extends State<OrderDetails> {
     if (controller.delivered.value) {
       return "Order Delivered";
     } else if (controller.ondelivery.value) {
-      return "Order is on Delivery";
+      return "Order is On Delivery";
     } else if (controller.confirmed.value) {
       return "Order Confirmed";
     } else {
@@ -246,23 +246,28 @@ class _OrderDetailsState extends State<OrderDetails> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              boldText(
-                                  text: "Shipping Address", color: purpleColor),
-                              "${widget.data['order_by_name']}".text.make(),
-                              "${widget.data['order_by_email']}".text.make(),
-                              "${widget.data['order_by_street']}".text.make(),
-                              "${widget.data['order_by_subdivi']}".text.make(),
-                              "${widget.data['order_by_city']}".text.make(),
-                              "${widget.data['order_by_phonenumber']}"
-                                  .text
-                                  .make(),
-                              "${widget.data['order_by_postalcode']}"
-                                  .text
-                                  .make(),
-                            ],
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                boldText(
+                                    text: "Shipping Address",
+                                    color: purpleColor),
+                                "${widget.data['order_by_name']}".text.make(),
+                                "${widget.data['order_by_email']}".text.make(),
+                                "${widget.data['order_by_street']}".text.make(),
+                                "${widget.data['order_by_subdivi']}"
+                                    .text
+                                    .make(),
+                                "${widget.data['order_by_city']}".text.make(),
+                                "${widget.data['order_by_phonenumber']}"
+                                    .text
+                                    .make(),
+                                "${widget.data['order_by_postalcode']}"
+                                    .text
+                                    .make(),
+                              ],
+                            ),
                           ),
                           SizedBox(
                             width: 130,

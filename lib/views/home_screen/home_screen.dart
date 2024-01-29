@@ -41,8 +41,21 @@ class HomeScreen extends StatelessWidget {
                           title: products,
                           count: "${data.length}",
                           icon: icProducts),
-                      dashboardButton(context,
-                          title: orders, count: "3", icon: icOrders),
+                      StreamBuilder(
+                        stream: StoreServices.getOrders(currentUser!.uid),
+                        builder: (BuildContext context,
+                            AsyncSnapshot<QuerySnapshot> ordersSnapshot) {
+                          if (!ordersSnapshot.hasData) {
+                            return loadingIndicator();
+                          } else {
+                            var ordersCount = ordersSnapshot.data!.docs.length;
+                            return dashboardButton(context,
+                                title: orders,
+                                count: "$ordersCount",
+                                icon: icOrders);
+                          }
+                        },
+                      ),
                     ],
                   ),
                   10.heightBox,

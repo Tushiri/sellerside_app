@@ -13,8 +13,18 @@ import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:path/path.dart';
 
 class ProductsController extends GetxController {
+  late QueryDocumentSnapshot snapshotData;
   var isloading = false.obs;
-
+  void clearState() {
+    pnameController.clear();
+    pdescController.clear();
+    ppriceController.clear();
+    pquantityController.clear();
+    categoryvalue.value = '';
+    subcategoryvalue.value = '';
+    pImagesList.assignAll(RxList<dynamic>.generate(3, (index) => null));
+    selectedColors.clear();
+  }
   //text field controllers
 
   var pnameController = TextEditingController();
@@ -83,6 +93,17 @@ class ProductsController extends GetxController {
         pImagesLinks.add(n);
       }
     }
+  }
+
+  Future<void> updateProduct(context, documentId) async {
+    await firestore.collection(productsCollection).doc(documentId).set({
+      'p_desc': pdescController.text,
+      'p_name': pnameController.text,
+      'p_price': ppriceController.text,
+      'p_quantity': pquantityController.text,
+    }, SetOptions(merge: true));
+
+    VxToast.show(context, msg: "Product Updated");
   }
 
   uploadProduct(context) async {

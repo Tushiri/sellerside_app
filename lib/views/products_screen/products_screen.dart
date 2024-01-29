@@ -5,6 +5,7 @@ import 'package:sellerside_app/const/const.dart';
 import 'package:sellerside_app/controllers/products_controller.dart';
 import 'package:sellerside_app/services/store_services.dart';
 import 'package:sellerside_app/views/products_screen/add_product.dart';
+import 'package:sellerside_app/views/products_screen/edit_product_screen.dart';
 import 'package:sellerside_app/views/products_screen/product_details.dart';
 import 'package:sellerside_app/views/widgets/appbar_widget.dart';
 import 'package:sellerside_app/views/widgets/loading_indicator.dart';
@@ -68,63 +69,67 @@ class ProductsScreen extends StatelessWidget {
                           ],
                         ),
                         trailing: VxPopupMenu(
-                            arrowSize: 0.0,
-                            menuBuilder: () => Column(
-                                  children: List.generate(
-                                    popupMenuIcons.length,
-                                    (i) => Padding(
-                                      padding: const EdgeInsets.all(12.0),
-                                      child: Row(
-                                        children: [
-                                          Icon(
-                                            popupMenuIcons[i],
-                                            color: data[index]['featured_id'] ==
-                                                        currentUser!.uid &&
-                                                    i == 0
-                                                ? green
-                                                : darkGrey,
-                                          ),
-                                          10.widthBox,
-                                          normalText(
-                                              text: data[index]
-                                                              ['featured_id'] ==
-                                                          currentUser!.uid &&
-                                                      i == 0
-                                                  ? 'Remove feature'
-                                                  : popupMenuTitles[i],
-                                              color: darkGrey)
-                                        ],
-                                      ).onTap(() {
-                                        //case 1: (edit)
-                                        switch (i) {
-                                          case 0:
-                                            if (data[index]['is_featured'] ==
-                                                true) {
-                                              controller.removeFeatured(
-                                                  data[index].id);
-                                              VxToast.show(context,
-                                                  msg: "Removed");
-                                            } else {
-                                              controller
-                                                  .addFeatured(data[index].id);
-                                              VxToast.show(context,
-                                                  msg: "Added");
-                                            }
-                                            break;
-                                          case 1:
-                                            controller
-                                                .removeProduct(data[index].id);
-                                            VxToast.show(context,
-                                                msg: "Product Remove");
-                                            break;
-                                          default:
-                                        }
-                                      }),
+                          arrowSize: 0.0,
+                          menuBuilder: () => Column(
+                            children: List.generate(
+                              popupMenuIcons.length,
+                              (i) => Padding(
+                                padding: const EdgeInsets.all(12.0),
+                                child: Row(
+                                  children: [
+                                    Icon(
+                                      popupMenuIcons[i],
+                                      color: data[index]['featured_id'] ==
+                                                  currentUser!.uid &&
+                                              i == 0
+                                          ? green
+                                          : darkGrey,
                                     ),
-                                  ),
-                                ).box.white.rounded.width(200).make(),
-                            clickType: VxClickType.singleClick,
-                            child: const Icon(Icons.more_vert_rounded)),
+                                    10.widthBox,
+                                    normalText(
+                                      text: data[index]['featured_id'] ==
+                                                  currentUser!.uid &&
+                                              i == 0
+                                          ? 'Remove feature'
+                                          : popupMenuTitles[i],
+                                      color: darkGrey,
+                                    ),
+                                  ],
+                                ).onTap(() {
+                                  switch (i) {
+                                    case 0:
+                                      if (data[index]['is_featured'] == true) {
+                                        controller
+                                            .removeFeatured(data[index].id);
+                                        VxToast.show(context, msg: "Removed");
+                                      } else {
+                                        controller.addFeatured(data[index].id);
+                                        VxToast.show(context, msg: "Added");
+                                      }
+                                      break;
+                                    case 1:
+                                      Get.to(
+                                        () => EditProduct(
+                                          productData: data[index].data()
+                                              as Map<String, dynamic>,
+                                          documentId: data[index].id,
+                                        ),
+                                      );
+                                      break;
+                                    case 2:
+                                      controller.removeProduct(data[index].id);
+                                      VxToast.show(context,
+                                          msg: "Product Remove");
+                                      break;
+                                    default:
+                                  }
+                                }),
+                              ),
+                            ),
+                          ).box.white.rounded.width(200).make(),
+                          clickType: VxClickType.singleClick,
+                          child: const Icon(Icons.more_vert_rounded),
+                        ),
                       ),
                     ),
                   ),
